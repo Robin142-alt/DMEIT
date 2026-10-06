@@ -70,6 +70,11 @@ export default function Footer({ onRequestService, onScheduleAppointment }) {
                 </Link>
               </li>
               <li>
+                <Link to="/help" style={{ color: '#CBD5E1', fontSize: '0.9rem', textDecoration: 'none' }}>
+                  Help & Guidance
+                </Link>
+              </li>
+              <li>
                 <Link to="/how-it-works" style={{ color: '#CBD5E1', fontSize: '0.9rem', textDecoration: 'none' }}>
                   How It Works & FAQs
                 </Link>

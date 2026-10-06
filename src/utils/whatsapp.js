@@ -87,6 +87,38 @@ export function formatAppointmentMessage({ name, phone, reason, date, time, pref
 }
 
 /**
+ * Creates the formatted WhatsApp message for the interactive Help guide:
+ */
+export function formatHelpGuideMessage({ mainNeed, situation, suggestedStep, name, phone, location, notes }) {
+  const parts = [
+    'Hello DMEIT Ventures,',
+    '',
+    'I need help with a water project.',
+    '',
+    'What I need help with:',
+    mainNeed || 'General Water Inquiry',
+    '',
+    'My situation:',
+    situation || 'Looking for technical guidance',
+    '',
+    'A possible next step:',
+    suggestedStep || 'Site advice and consultation',
+    '',
+    `Location: ${location || 'Not specified'}`,
+    `Name: ${name || 'Not provided'}`,
+    `Phone: ${phone || 'Not provided'}`,
+  ];
+
+  if (notes && notes.trim().length > 0) {
+    parts.push('', 'Additional details:', notes.trim());
+  }
+
+  parts.push('', 'Please guide me on the next step.', '', 'Thank you.');
+
+  return parts.join('\n');
+}
+
+/**
  * Generates the wa.me link with proper URL encoding
  */
 export function buildWhatsAppLink(messageText) {

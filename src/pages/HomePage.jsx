@@ -389,19 +389,19 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
 
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <Link
+                  to="/help"
+                  className="btn btn-secondary btn-sm"
+                  style={{ fontWeight: 700, borderColor: 'var(--brand-blue-700)', color: 'var(--brand-blue-700)' }}
+                >
+                  <span>Need Help? Guided Choice</span>
+                  <ArrowRight size={14} />
+                </Link>
+                <Link
                   to="/contact"
                   className="btn btn-primary btn-sm"
                   style={{ fontWeight: 700 }}
                 >
                   <span>Talk to Our Team</span>
-                  <ArrowRight size={15} />
-                </Link>
-                <Link
-                  to="/how-it-works"
-                  className="btn btn-secondary btn-sm"
-                  style={{ fontWeight: 600 }}
-                >
-                  <span>Process & FAQs</span>
                 </Link>
               </div>
             </div>
