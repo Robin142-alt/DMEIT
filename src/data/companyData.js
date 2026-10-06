@@ -17,7 +17,7 @@ export const companyData = {
     'DMEIT Ventures Ltd is a hands-on water infrastructure contractor. Led by Director David Nkadayo, we help homeowners, farms, institutions, and communities find, pump, store, and distribute clean groundwater through reliable drilling, solar pumping, and piping systems.',
   values: [
     {
-      title: 'Real Field Equipment',
+      title: 'Dedicated Field Equipment',
       description: 'We operate our own heavy drilling machinery, test equipment, and field transport.',
     },
     {

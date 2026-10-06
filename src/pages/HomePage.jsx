@@ -211,7 +211,7 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
                 marginBottom: '0.4rem',
               }}
             >
-              Real Evidence
+              Field Evidence
             </p>
             <h2
               style={{
@@ -221,10 +221,10 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
                 marginBottom: '0.65rem',
               }}
             >
-              Real Work in the Field
+              Work in the Field
             </h2>
             <p style={{ fontSize: '0.975rem', color: 'var(--text-muted)', lineHeight: '1.55' }}>
-              Real photos from DMEIT project sites across Kenya.
+              Photos from DMEIT project sites across Kenya.
             </p>
           </div>
 
