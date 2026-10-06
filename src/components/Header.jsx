@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Menu, X, ArrowRight } from 'lucide-react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
+import { Phone, Menu, X, ArrowRight } from 'lucide-react';
 import { companyData } from '../data/companyData';
 
-export default function Header({ onRequestService, onScheduleAppointment }) {
+export default function Header({ onRequestService }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,22 +16,19 @@ export default function Header({ onRequestService, onScheduleAppointment }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'Services', href: '#services' },
-    { label: 'Our Work', href: '#our-work' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
-  ];
-
-  const handleNavClick = (href) => {
+  // Close mobile drawer on route change
+  useEffect(() => {
     setMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  }, [location.pathname]);
+
+  const navLinks = [
+    { label: 'Home', path: '/' },
+    { label: 'Services', path: '/services' },
+    { label: 'Our Work', path: '/our-work' },
+    { label: 'How It Works', path: '/how-it-works' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
+  ];
 
   return (
     <header
@@ -39,7 +38,7 @@ export default function Header({ onRequestService, onScheduleAppointment }) {
         zIndex: 900,
         backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.98)' : 'var(--bg-primary)',
         backdropFilter: 'blur(10px)',
-        borderBottom: `1px solid ${scrolled ? 'var(--border-subtle)' : 'transparent'}`,
+        borderBottom: `1px solid ${scrolled ? 'var(--border-subtle)' : 'var(--border-subtle)'}`,
         boxShadow: scrolled ? '0 2px 10px rgba(0, 0, 0, 0.05)' : 'none',
         transition: 'all 200ms ease',
       }}
@@ -54,8 +53,8 @@ export default function Header({ onRequestService, onScheduleAppointment }) {
           }}
         >
           {/* Logo Brand */}
-          <a
-            href="#home"
+          <Link
+            to="/"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -67,42 +66,41 @@ export default function Header({ onRequestService, onScheduleAppointment }) {
               src={companyData.logo}
               alt="DMEIT Ventures Ltd Logo"
               style={{
-                height: '48px',
+                height: '46px',
                 width: 'auto',
                 maxWidth: '180px',
                 objectFit: 'contain',
               }}
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links */}
           <nav
             style={{
               display: 'none',
               alignItems: 'center',
-              gap: '1.75rem',
+              gap: '1.5rem',
             }}
             className="desktop-nav"
           >
             {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.href);
-                }}
-                style={{
+              <NavLink
+                key={link.path}
+                to={link.path}
+                end={link.path === '/'}
+                style={({ isActive }) => ({
                   fontSize: '0.95rem',
-                  fontWeight: 600,
-                  color: 'var(--brand-navy-900)',
-                  transition: 'color var(--transition-fast)',
-                }}
-                onMouseEnter={(e) => (e.target.style.color = 'var(--brand-blue-500)')}
-                onMouseLeave={(e) => (e.target.style.color = 'var(--brand-navy-900)')}
+                  fontWeight: isActive ? 700 : 600,
+                  color: isActive ? 'var(--brand-blue-700)' : 'var(--brand-navy-900)',
+                  textDecoration: 'none',
+                  padding: '0.4rem 0.2rem',
+                  position: 'relative',
+                  borderBottom: isActive ? '2px solid var(--brand-blue-700)' : '2px solid transparent',
+                  transition: 'all var(--transition-fast)',
+                })}
               >
                 {link.label}
-              </a>
+              </NavLink>
             ))}
           </nav>
 
@@ -176,29 +174,28 @@ export default function Header({ onRequestService, onScheduleAppointment }) {
             animation: 'fadeIn 150ms ease forwards',
           }}
         >
-          <nav style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
             {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.href);
-                }}
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  color: 'var(--brand-navy-950)',
-                  padding: '0.4rem 0',
+              <NavLink
+                key={link.path}
+                to={link.path}
+                end={link.path === '/'}
+                onClick={() => setMobileMenuOpen(false)}
+                style={({ isActive }) => ({
+                  fontSize: '1.05rem',
+                  fontWeight: isActive ? 800 : 600,
+                  color: isActive ? 'var(--brand-blue-700)' : 'var(--brand-navy-950)',
+                  padding: '0.5rem 0',
                   borderBottom: '1px solid var(--bg-tertiary)',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                }}
+                  textDecoration: 'none',
+                })}
               >
                 <span>{link.label}</span>
                 <ArrowRight size={16} color="var(--text-muted)" />
-              </a>
+              </NavLink>
             ))}
           </nav>
 
@@ -214,26 +211,13 @@ export default function Header({ onRequestService, onScheduleAppointment }) {
               Request a Service
             </button>
 
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onScheduleAppointment();
-              }}
+            <a
+              href={`tel:${companyData.phoneRaw}`}
               className="btn btn-secondary btn-lg"
               style={{ width: '100%', justifyContent: 'center' }}
             >
-              Schedule an Appointment
-            </button>
-
-            <a
-              href={companyData.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-whatsapp btn-lg"
-              style={{ width: '100%', justifyContent: 'center' }}
-            >
-              <MessageCircle size={18} />
-              Chat on WhatsApp
+              <Phone size={18} />
+              <span>Call: {companyData.phoneDisplay}</span>
             </a>
           </div>
         </div>

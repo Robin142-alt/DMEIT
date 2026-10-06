@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Phone, Mail, MessageCircle, ArrowUp } from 'lucide-react';
 import { companyData } from '../data/companyData';
 
@@ -29,62 +30,64 @@ export default function Footer({ onRequestService, onScheduleAppointment }) {
           {/* Col 1: Brand & Identity */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-              <img
-                src={companyData.logo}
-                alt="DMEIT Ventures Ltd"
-                style={{
-                  height: '42px',
-                  width: 'auto',
-                  objectFit: 'contain',
-                  backgroundColor: '#FFFFFF',
-                  padding: '4px 8px',
-                  borderRadius: 'var(--radius-sm)',
-                }}
-              />
+              <Link to="/">
+                <img
+                  src={companyData.logo}
+                  alt="DMEIT Ventures Ltd"
+                  style={{
+                    height: '42px',
+                    width: 'auto',
+                    objectFit: 'contain',
+                    backgroundColor: '#FFFFFF',
+                    padding: '4px 8px',
+                    borderRadius: 'var(--radius-sm)',
+                  }}
+                />
+              </Link>
             </div>
             <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#CBD5E1', marginBottom: '1rem' }}>
-              {companyData.tagline}. Professional borehole drilling, solar water pumping, and infrastructure engineering in Kenya.
+              {companyData.tagline}. Practical borehole drilling, solar water pumping, and pipeline water works across Kenya.
             </p>
             <p style={{ fontSize: '0.85rem', color: '#94A3B8' }}>
               Director: <strong style={{ color: '#FFFFFF' }}>{companyData.director}</strong>
             </p>
           </div>
 
-          {/* Col 2: Fast Navigation */}
+          {/* Col 2: Fast Navigation Pages */}
           <div>
             <h4 style={{ color: '#FFFFFF', fontSize: '1rem', fontWeight: 700, marginBottom: '1rem' }}>
-              Quick Navigation
+              Pages
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
               <li>
-                <a href="#services" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
-                  Our Services
-                </a>
+                <Link to="/" style={{ color: '#CBD5E1', fontSize: '0.9rem', textDecoration: 'none' }}>
+                  Home
+                </Link>
               </li>
               <li>
-                <a href="#our-work" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
-                  Real Project Gallery (18 Photos)
-                </a>
+                <Link to="/services" style={{ color: '#CBD5E1', fontSize: '0.9rem', textDecoration: 'none' }}>
+                  Services & Solutions
+                </Link>
               </li>
               <li>
-                <a href="#not-sure" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
-                  Not Sure What You Need?
-                </a>
+                <Link to="/our-work" style={{ color: '#CBD5E1', fontSize: '0.9rem', textDecoration: 'none' }}>
+                  Our Work (18 Real Photos)
+                </Link>
               </li>
               <li>
-                <a href="#how-it-works" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
-                  How It Works
-                </a>
+                <Link to="/how-it-works" style={{ color: '#CBD5E1', fontSize: '0.9rem', textDecoration: 'none' }}>
+                  How It Works & FAQs
+                </Link>
               </li>
               <li>
-                <a href="#about" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
+                <Link to="/about" style={{ color: '#CBD5E1', fontSize: '0.9rem', textDecoration: 'none' }}>
                   About DMEIT
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
-                  Contact Us
-                </a>
+                <Link to="/contact" style={{ color: '#CBD5E1', fontSize: '0.9rem', textDecoration: 'none' }}>
+                  Contact & Digital Front Office
+                </Link>
               </li>
             </ul>
           </div>
@@ -104,6 +107,7 @@ export default function Footer({ onRequestService, onScheduleAppointment }) {
                   color: '#FFFFFF',
                   fontSize: '0.95rem',
                   fontWeight: 600,
+                  textDecoration: 'none',
                 }}
               >
                 <Phone size={16} color="var(--brand-cyan-300)" />
@@ -121,6 +125,7 @@ export default function Footer({ onRequestService, onScheduleAppointment }) {
                   color: '#25D366',
                   fontSize: '0.95rem',
                   fontWeight: 600,
+                  textDecoration: 'none',
                 }}
               >
                 <MessageCircle size={16} color="#25D366" />
@@ -136,6 +141,7 @@ export default function Footer({ onRequestService, onScheduleAppointment }) {
                   color: '#CBD5E1',
                   fontSize: '0.9rem',
                   wordBreak: 'break-all',
+                  textDecoration: 'none',
                 }}
               >
                 <Mail size={16} color="var(--brand-cyan-300)" />

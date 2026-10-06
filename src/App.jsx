@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import QuickHelpBanner from './components/QuickHelpBanner';
-import ServicesSection from './components/ServicesSection';
-import NotSureHelp from './components/NotSureHelp';
-import HowItWorks from './components/HowItWorks';
-import OurWorkGallery from './components/OurWorkGallery';
-import AboutSection from './components/AboutSection';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import MobileStickyBar from './components/MobileStickyBar';
 import ServiceRequestModal from './components/ServiceRequestModal';
 import AppointmentModal from './components/AppointmentModal';
 import LightboxModal from './components/LightboxModal';
+import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
+import OurWorkPage from './pages/OurWorkPage';
+import HowItWorksPage from './pages/HowItWorksPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import { projectGallery, companyData } from './data/companyData';
 import { MessageCircle } from 'lucide-react';
 
@@ -60,106 +60,112 @@ export default function App() {
     setActivePhotoIndex(newIndex);
   };
 
-  const scrollToNotSure = () => {
-    const el = document.getElementById('not-sure');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div className="dmeit-app">
-      {/* 1. Header Navigation */}
-      <Header
-        onRequestService={() => handleOpenRequestModal()}
-        onScheduleAppointment={handleOpenAppointmentModal}
-      />
+    <BrowserRouter>
+      <ScrollToTop />
+      <div className="dmeit-app">
+        {/* Navigation Header */}
+        <Header onRequestService={() => handleOpenRequestModal()} />
 
-      <main>
-        {/* 2. Hero Section */}
-        <Hero
+        {/* Page Routing */}
+        <main>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  onRequestService={handleOpenRequestModal}
+                  onScheduleAppointment={handleOpenAppointmentModal}
+                  onOpenLightbox={handleOpenLightbox}
+                />
+              }
+            />
+            <Route
+              path="/services"
+              element={<ServicesPage onRequestService={handleOpenRequestModal} />}
+            />
+            <Route
+              path="/our-work"
+              element={
+                <OurWorkPage
+                  onOpenLightbox={handleOpenLightbox}
+                  onRequestService={handleOpenRequestModal}
+                />
+              }
+            />
+            <Route
+              path="/how-it-works"
+              element={
+                <HowItWorksPage
+                  onRequestService={handleOpenRequestModal}
+                  onScheduleAppointment={handleOpenAppointmentModal}
+                />
+              }
+            />
+            <Route
+              path="/about"
+              element={<AboutPage onRequestService={handleOpenRequestModal} />}
+            />
+            <Route
+              path="/contact"
+              element={<ContactPage onScheduleAppointment={handleOpenAppointmentModal} />}
+            />
+            {/* Fallback to Home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+
+        {/* Footer */}
+        <Footer
           onRequestService={() => handleOpenRequestModal()}
           onScheduleAppointment={handleOpenAppointmentModal}
         />
 
-        {/* 3. Quick Help Banner */}
-        <QuickHelpBanner
-          onNotSureClick={scrollToNotSure}
-          onRequestService={() => handleOpenRequestModal('Not Sure / I Need Advice')}
+        {/* Desktop Floating WhatsApp Launcher */}
+        <div className="floating-actions" style={{ display: 'none' }}>
+          <a
+            href={companyData.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="floating-whatsapp-btn"
+            aria-label="Chat directly on WhatsApp"
+            title="Chat with DMEIT on WhatsApp"
+          >
+            <MessageCircle size={28} />
+          </a>
+        </div>
+
+        {/* Mobile Sticky Action Bar */}
+        <MobileStickyBar onRequestService={() => handleOpenRequestModal()} />
+
+        {/* Modals Accessible Across All Pages */}
+        <ServiceRequestModal
+          isOpen={isRequestModalOpen}
+          onClose={handleCloseRequestModal}
+          initialService={selectedService}
         />
 
-        {/* 4. Practical Services Section */}
-        <ServicesSection
-          onSelectService={(serviceName) => handleOpenRequestModal(serviceName)}
+        <AppointmentModal
+          isOpen={isAppointmentModalOpen}
+          onClose={handleCloseAppointmentModal}
         />
 
-        {/* 5. Not Sure What You Need Empathy Guide */}
-        <NotSureHelp
-          onSelectService={(serviceName) => handleOpenRequestModal(serviceName)}
-          onOpenRequest={(serviceName) => handleOpenRequestModal(serviceName)}
+        <LightboxModal
+          images={projectGallery}
+          activeIndex={activePhotoIndex}
+          isOpen={isLightboxOpen}
+          onClose={handleCloseLightbox}
+          onNavigate={handleNavigateLightbox}
         />
 
-        {/* 6. How It Works 3-Step Journey */}
-        <HowItWorks />
-
-        {/* 7. Real Project Gallery (18 Curated Photos) */}
-        <OurWorkGallery onOpenLightbox={handleOpenLightbox} />
-
-        {/* 8. About DMEIT & Director David Nkadayo */}
-        <AboutSection onRequestService={() => handleOpenRequestModal()} />
-
-        {/* 9. Contact & In-Page Request Form */}
-        <ContactSection onScheduleAppointment={handleOpenAppointmentModal} />
-      </main>
-
-      {/* 10. Footer */}
-      <Footer
-        onRequestService={() => handleOpenRequestModal()}
-        onScheduleAppointment={handleOpenAppointmentModal}
-      />
-
-      {/* Desktop Floating WhatsApp Launcher */}
-      <div className="floating-actions" style={{ display: 'none' }}>
-        <a
-          href={companyData.whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="floating-whatsapp-btn"
-          aria-label="Chat directly on WhatsApp"
-          title="Chat with DMEIT on WhatsApp"
-        >
-          <MessageCircle size={28} />
-        </a>
-      </div>
-
-      {/* Mobile Sticky Action Bar */}
-      <MobileStickyBar onRequestService={() => handleOpenRequestModal()} />
-
-      {/* Interactive Modals */}
-      <ServiceRequestModal
-        isOpen={isRequestModalOpen}
-        onClose={handleCloseRequestModal}
-        initialService={selectedService}
-      />
-
-      <AppointmentModal
-        isOpen={isAppointmentModalOpen}
-        onClose={handleCloseAppointmentModal}
-      />
-
-      <LightboxModal
-        images={projectGallery}
-        activeIndex={activePhotoIndex}
-        isOpen={isLightboxOpen}
-        onClose={handleCloseLightbox}
-        onNavigate={handleNavigateLightbox}
-      />
-
-      <style>{`
-        @media (min-width: 768px) {
-          .floating-actions {
-            display: flex !important;
+        <style>{`
+          @media (min-width: 768px) {
+            .floating-actions {
+              display: flex !important;
+            }
           }
-        }
-      `}</style>
-    </div>
+        `}</style>
+      </div>
+    </BrowserRouter>
   );
 }
