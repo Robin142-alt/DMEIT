@@ -221,7 +221,7 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
                 marginBottom: '0.65rem',
               }}
             >
-              Our Work in the Field
+              Real Work in the Field
             </h2>
             <p style={{ fontSize: '0.975rem', color: 'var(--text-muted)', lineHeight: '1.55' }}>
               Real photos from DMEIT project sites across Kenya.
@@ -323,22 +323,6 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
                 </div>
               );
             })}
-          </div>
-
-          {/* Single Clear Next Step Button */}
-          <div style={{ textAlign: 'center' }}>
-            <Link
-              to="/our-work"
-              className="btn btn-secondary btn-md"
-              style={{
-                fontWeight: 700,
-                borderColor: 'var(--brand-blue-700)',
-                color: 'var(--brand-blue-700)',
-              }}
-            >
-              <span>See Our Work (All 18 Photos)</span>
-              <ArrowRight size={16} />
-            </Link>
           </div>
         </div>
       </section>

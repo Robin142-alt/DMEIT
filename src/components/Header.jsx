@@ -24,7 +24,6 @@ export default function Header({ onRequestService }) {
   const navLinks = [
     { label: 'Home', path: '/' },
     { label: 'Services', path: '/services' },
-    { label: 'Our Work', path: '/our-work' },
     { label: 'How It Works', path: '/how-it-works' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },

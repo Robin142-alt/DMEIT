@@ -9,7 +9,6 @@ import AppointmentModal from './components/AppointmentModal';
 import LightboxModal from './components/LightboxModal';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
-import OurWorkPage from './pages/OurWorkPage';
 import HowItWorksPage from './pages/HowItWorksPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
@@ -84,15 +83,8 @@ export default function App() {
               path="/services"
               element={<ServicesPage onRequestService={handleOpenRequestModal} />}
             />
-            <Route
-              path="/our-work"
-              element={
-                <OurWorkPage
-                  onOpenLightbox={handleOpenLightbox}
-                  onRequestService={handleOpenRequestModal}
-                />
-              }
-            />
+            {/* Safe redirect for any legacy /our-work bookmarks or links */}
+            <Route path="/our-work" element={<Navigate to="/services" replace />} />
             <Route
               path="/how-it-works"
               element={
