@@ -1,0 +1,211 @@
+import React from 'react';
+import { Phone, Mail, MessageCircle, ArrowUp } from 'lucide-react';
+import { companyData } from '../data/companyData';
+
+export default function Footer({ onRequestService, onScheduleAppointment }) {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <footer
+      style={{
+        backgroundColor: 'var(--brand-navy-950)',
+        color: '#94A3B8',
+        paddingTop: '3.5rem',
+        paddingBottom: '2.5rem',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+      }}
+    >
+      <div className="container">
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '2.5rem',
+            marginBottom: '3rem',
+          }}
+        >
+          {/* Col 1: Brand & Identity */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+              <img
+                src={companyData.logo}
+                alt="DMEIT Ventures Ltd"
+                style={{
+                  height: '42px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  backgroundColor: '#FFFFFF',
+                  padding: '4px 8px',
+                  borderRadius: 'var(--radius-sm)',
+                }}
+              />
+            </div>
+            <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#CBD5E1', marginBottom: '1rem' }}>
+              {companyData.tagline}. Professional borehole drilling, solar water pumping, and infrastructure engineering in Kenya.
+            </p>
+            <p style={{ fontSize: '0.85rem', color: '#94A3B8' }}>
+              Director: <strong style={{ color: '#FFFFFF' }}>{companyData.director}</strong>
+            </p>
+          </div>
+
+          {/* Col 2: Fast Navigation */}
+          <div>
+            <h4 style={{ color: '#FFFFFF', fontSize: '1rem', fontWeight: 700, marginBottom: '1rem' }}>
+              Quick Navigation
+            </h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              <li>
+                <a href="#services" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
+                  Our Services
+                </a>
+              </li>
+              <li>
+                <a href="#our-work" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
+                  Real Project Gallery (18 Photos)
+                </a>
+              </li>
+              <li>
+                <a href="#not-sure" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
+                  Not Sure What You Need?
+                </a>
+              </li>
+              <li>
+                <a href="#how-it-works" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
+                  How It Works
+                </a>
+              </li>
+              <li>
+                <a href="#about" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
+                  About DMEIT
+                </a>
+              </li>
+              <li>
+                <a href="#contact" style={{ color: '#CBD5E1', fontSize: '0.9rem', transition: 'color 150ms' }}>
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Direct Official Contact */}
+          <div>
+            <h4 style={{ color: '#FFFFFF', fontSize: '1rem', fontWeight: 700, marginBottom: '1rem' }}>
+              Official Contact
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              <a
+                href={`tel:${companyData.phoneRaw}`}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: '#FFFFFF',
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                }}
+              >
+                <Phone size={16} color="var(--brand-cyan-300)" />
+                <span>{companyData.phoneDisplay}</span>
+              </a>
+
+              <a
+                href={companyData.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: '#25D366',
+                  fontSize: '0.95rem',
+                  fontWeight: 600,
+                }}
+              >
+                <MessageCircle size={16} color="#25D366" />
+                <span>WhatsApp: {companyData.phoneDisplay}</span>
+              </a>
+
+              <a
+                href={`mailto:${companyData.email}`}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  color: '#CBD5E1',
+                  fontSize: '0.9rem',
+                  wordBreak: 'break-all',
+                }}
+              >
+                <Mail size={16} color="var(--brand-cyan-300)" />
+                <span>{companyData.email}</span>
+              </a>
+            </div>
+
+            <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <button
+                onClick={onRequestService}
+                className="btn btn-secondary btn-sm"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  color: '#FFFFFF',
+                  borderColor: 'rgba(255, 255, 255, 0.2)',
+                  fontSize: '0.8rem',
+                }}
+              >
+                Request Service
+              </button>
+              <button
+                onClick={onScheduleAppointment}
+                className="btn btn-secondary btn-sm"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  color: '#FFFFFF',
+                  borderColor: 'rgba(255, 255, 255, 0.2)',
+                  fontSize: '0.8rem',
+                }}
+              >
+                Appointment
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Copyright & Back to Top */}
+        <div
+          style={{
+            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+            paddingTop: '1.5rem',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1rem',
+            fontSize: '0.825rem',
+          }}
+        >
+          <p>© {new Date().getFullYear()} {companyData.name}. All rights reserved.</p>
+
+          <button
+            onClick={scrollToTop}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              color: '#CBD5E1',
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              padding: '0.4rem 0.8rem',
+              borderRadius: 'var(--radius-full)',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+            }}
+          >
+            <span>Back to top</span>
+            <ArrowUp size={14} />
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+}
