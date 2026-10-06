@@ -1,338 +1,436 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ArrowRight,
-  Droplets,
-  Wrench,
-  Camera,
-  Calendar,
-  MessageCircle,
-  Phone,
-  ShieldCheck,
-  CheckCircle2,
-} from 'lucide-react';
+import { ArrowRight, Compass, Wrench, Droplets, ArrowUpRight, MessageSquare, Send } from 'lucide-react';
 import Hero from '../components/Hero';
-import QuickHelpBanner from '../components/QuickHelpBanner';
-import HowItWorks from '../components/HowItWorks';
-import { companyData, serviceCategories, projectGallery } from '../data/companyData';
+import { projectGallery, companyData } from '../data/companyData';
 
 export default function HomePage({ onRequestService, onScheduleAppointment, onOpenLightbox }) {
-  // Select top featured projects for homepage preview
-  const featuredProjects = projectGallery.filter((p) => p.featured).slice(0, 4);
+  // 4 Simple Homepage Service Summaries as instructed
+  const homeServices = [
+    {
+      title: 'Find Water',
+      subtitle: 'Survey & Borehole Drilling',
+      description: 'Ground assessments and deep borehole drilling to reach reliable groundwater.',
+      link: '/services',
+    },
+    {
+      title: 'Equip Boreholes',
+      subtitle: 'Borehole Equipment & Pumping',
+      description: 'Submersible pumps, solar power systems, and control equipment to lift water.',
+      link: '/services',
+    },
+    {
+      title: 'Store & Move Water',
+      subtitle: 'Storage & Pipelines',
+      description: 'Elevated steel towers, durable ground tanks, and long-distance piping.',
+      link: '/services',
+    },
+    {
+      title: 'Community & Farm Water',
+      subtitle: 'Water Points, Troughs, Pans & Dams',
+      description: 'Livestock troughs, communal tap kiosks, and bulk catchment works.',
+      link: '/services',
+    },
+  ];
+
+  // 4 Curated Real Photos with larger visuals and minimal text
+  const homePhotos = [
+    {
+      id: 'proj-01',
+      title: 'Borehole Drilling',
+      category: 'Borehole Drilling',
+      image: '/assets/images/borehole_drilling_rig_dmeit.jpg',
+    },
+    {
+      id: 'proj-02',
+      title: 'Solar Water Flow',
+      category: 'Solar Pumping',
+      image: '/assets/images/solar_pumping_test.jpg',
+    },
+    {
+      id: 'proj-04',
+      title: 'Elevated Storage Tower',
+      category: 'Water Storage',
+      image: '/assets/images/elevated_steel_tank_tower.jpg',
+    },
+    {
+      id: 'proj-08',
+      title: 'Pipeline Installation',
+      category: 'Pipelines',
+      image: '/assets/images/hdpe_pipeline_laying.jpg',
+    },
+  ];
 
   return (
-    <div>
-      {/* 1. Hero Section */}
+    <div className="homepage-rebuild">
+      {/* 1. Hero Section (Cinematic photo background + 3 preserved primary actions) */}
       <Hero
         onRequestService={() => onRequestService()}
         onScheduleAppointment={onScheduleAppointment}
       />
 
-      {/* 2. Quick Help Banner */}
-      <QuickHelpBanner
-        onNotSureClick={() => onRequestService('Not Sure / I Need Advice')}
-        onRequestService={() => onRequestService('Not Sure / I Need Advice')}
-      />
-
-      {/* 3. Services Overview Section */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+      {/* 2. Short Service Overview (Open layout, 4 simple categories, ONE 'View All Services' button) */}
+      <section style={{ backgroundColor: 'var(--bg-primary)', padding: '4rem 0 3.5rem 0' }}>
         <div className="container">
-          <div className="section-header">
-            <div className="section-badge">
-              <Droplets size={14} />
-              <span>Core Water Solutions</span>
-            </div>
-            <h2 className="section-title">What DMEIT Does</h2>
-            <p className="section-subtitle">
-              We handle the entire water journey — finding underground aquifers, drilling boreholes, equipping solar pumps, and piping water where you need it.
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              maxWidth: '620px',
+              margin: '0 auto 2.5rem auto',
+            }}
+          >
+            <p
+              style={{
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.06em',
+                color: 'var(--brand-blue-700)',
+                marginBottom: '0.4rem',
+              }}
+            >
+              Services Overview
+            </p>
+            <h2
+              style={{
+                fontSize: 'clamp(1.75rem, 3vw, 2.25rem)',
+                fontWeight: 800,
+                color: 'var(--brand-navy-950)',
+                marginBottom: '0.65rem',
+              }}
+            >
+              Water Services Made Simple
+            </h2>
+            <p style={{ fontSize: '0.975rem', color: 'var(--text-muted)', lineHeight: '1.55' }}>
+              We manage the entire project from initial ground study to turning on your tap.
             </p>
           </div>
 
+          {/* 4 Clean Categories Grid */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
-              gap: '1.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '1.25rem',
               marginBottom: '2.5rem',
             }}
           >
-            {serviceCategories.map((cat) => (
+            {homeServices.map((item, idx) => (
               <div
-                key={cat.id}
-                className="card"
+                key={idx}
                 style={{
-                  padding: '1.75rem 1.5rem',
+                  padding: '1.5rem',
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid var(--border-subtle)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  backgroundColor: 'var(--bg-primary)',
-                  border: '1.5px solid var(--border-subtle)',
                 }}
               >
                 <div>
-                  <div
+                  <span
                     style={{
-                      display: 'inline-flex',
-                      padding: '0.4rem 0.75rem',
-                      borderRadius: 'var(--radius-sm)',
-                      backgroundColor: 'var(--brand-cyan-50)',
-                      color: 'var(--brand-blue-700)',
-                      fontSize: '0.8rem',
+                      display: 'inline-block',
+                      fontSize: '0.75rem',
                       fontWeight: 800,
-                      marginBottom: '1rem',
+                      color: 'var(--brand-blue-700)',
                       textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      marginBottom: '0.5rem',
                     }}
                   >
-                    Category
-                  </div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--brand-navy-950)', marginBottom: '0.5rem' }}>
-                    {cat.categoryName}
+                    {item.title}
+                  </span>
+                  <h3
+                    style={{
+                      fontSize: '1.15rem',
+                      fontWeight: 800,
+                      color: 'var(--brand-navy-950)',
+                      marginBottom: '0.5rem',
+                      lineHeight: '1.35',
+                    }}
+                  >
+                    {item.subtitle}
                   </h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-body)', lineHeight: '1.5', marginBottom: '1.25rem' }}>
-                    {cat.summary}
+                  <p
+                    style={{
+                      fontSize: '0.875rem',
+                      color: 'var(--text-body)',
+                      lineHeight: '1.5',
+                    }}
+                  >
+                    {item.description}
                   </p>
-
-                  <ul style={{ listStyle: 'none', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-                    {cat.services.map((s) => (
-                      <li key={s.id} style={{ fontSize: '0.875rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                        <CheckCircle2 size={15} color="var(--brand-blue-500)" style={{ flexShrink: 0 }} />
-                        <span>{s.name}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-
-                <Link
-                  to="/services"
-                  className="btn btn-secondary btn-sm"
-                  style={{ width: '100%', justifyContent: 'space-between', fontWeight: 700 }}
-                >
-                  <span>Explore Services</span>
-                  <ArrowRight size={15} />
-                </Link>
               </div>
             ))}
           </div>
 
+          {/* Single Clear Next Step Button */}
           <div style={{ textAlign: 'center' }}>
             <Link
               to="/services"
-              className="btn btn-primary btn-lg"
-              style={{ fontWeight: 700 }}
+              className="btn btn-secondary btn-md"
+              style={{
+                fontWeight: 700,
+                borderColor: 'var(--brand-blue-700)',
+                color: 'var(--brand-blue-700)',
+              }}
             >
-              <span>View All Detailed Services</span>
-              <ArrowRight size={18} />
+              <span>View All Services & Details</span>
+              <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 4. How It Works 3-Step Section */}
-      <HowItWorks />
-
-      {/* 5. Featured Work Preview */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      {/* 3. Real Work / Trust Preview (Larger photos, minimal text, ONE 'See Our Work' button) */}
+      <section style={{ backgroundColor: 'var(--bg-secondary)', padding: '4rem 0 3.5rem 0' }}>
         <div className="container">
-          <div className="section-header">
-            <div className="section-badge">
-              <Camera size={14} />
-              <span>Field Proof</span>
-            </div>
-            <h2 className="section-title">Actual DMEIT Project Work</h2>
-            <p className="section-subtitle">
-              Take a look at genuine field photos from our drilling sites, solar pumping installations, elevated towers, and pipeline supply lines.
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              maxWidth: '620px',
+              margin: '0 auto 2.5rem auto',
+            }}
+          >
+            <p
+              style={{
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.06em',
+                color: 'var(--brand-blue-700)',
+                marginBottom: '0.4rem',
+              }}
+            >
+              Real Evidence
+            </p>
+            <h2
+              style={{
+                fontSize: 'clamp(1.75rem, 3vw, 2.25rem)',
+                fontWeight: 800,
+                color: 'var(--brand-navy-950)',
+                marginBottom: '0.65rem',
+              }}
+            >
+              Our Work in the Field
+            </h2>
+            <p style={{ fontSize: '0.975rem', color: 'var(--text-muted)', lineHeight: '1.55' }}>
+              Real photos from DMEIT project sites across Kenya.
             </p>
           </div>
 
+          {/* 4 Large Clean Photos */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
               gap: '1.25rem',
               marginBottom: '2.5rem',
             }}
           >
-            {featuredProjects.map((p, idx) => {
-              const globalIdx = projectGallery.findIndex((item) => item.id === p.id);
+            {homePhotos.map((item) => {
+              const globalIndex = projectGallery.findIndex((p) => p.id === item.id);
               return (
                 <div
-                  key={p.id}
-                  onClick={() => onOpenLightbox(globalIdx)}
-                  className="card"
+                  key={item.id}
+                  onClick={() => onOpenLightbox(globalIndex !== -1 ? globalIndex : 0)}
                   style={{
-                    cursor: 'pointer',
+                    position: 'relative',
+                    borderRadius: 'var(--radius-lg)',
                     overflow: 'hidden',
-                    backgroundColor: 'var(--bg-secondary)',
+                    backgroundColor: 'var(--brand-navy-950)',
+                    cursor: 'pointer',
+                    boxShadow: 'var(--shadow-sm)',
                     border: '1px solid var(--border-subtle)',
+                    height: '270px',
                   }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onOpenLightbox(globalIndex !== -1 ? globalIndex : 0);
+                    }
+                  }}
+                  aria-label={`View photo: ${item.title}`}
                 >
-                  <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
-                    <img
-                      src={p.image}
-                      alt={p.title}
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                      transition: 'transform 300ms ease',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.transform = 'scale(1.04)')}
+                    onMouseLeave={(e) => (e.target.style.transform = 'scale(1.0)')}
+                    loading="lazy"
+                  />
+
+                  {/* Clean Bottom Label */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      padding: '1rem',
+                      background: 'linear-gradient(to top, rgba(7, 28, 51, 0.9) 0%, rgba(7, 28, 51, 0.4) 60%, transparent 100%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <div>
+                      <span
+                        style={{
+                          fontSize: '0.725rem',
+                          fontWeight: 700,
+                          color: 'var(--brand-cyan-300)',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {item.category}
+                      </span>
+                      <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFFFFF', margin: 0 }}>
+                        {item.title}
+                      </h4>
+                    </div>
+                    <span
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transition: 'transform 250ms ease',
-                      }}
-                      onMouseEnter={(e) => (e.target.style.transform = 'scale(1.05)')}
-                      onMouseLeave={(e) => (e.target.style.transform = 'scale(1.0)')}
-                      loading="lazy"
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '10px',
-                        left: '10px',
-                        backgroundColor: 'rgba(7, 28, 51, 0.85)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
                         color: '#FFFFFF',
-                        fontSize: '0.725rem',
-                        fontWeight: 700,
-                        padding: '0.2rem 0.6rem',
-                        borderRadius: 'var(--radius-sm)',
+                        borderRadius: 'var(--radius-full)',
+                        padding: '0.25rem 0.65rem',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
                       }}
                     >
-                      {p.category}
-                    </div>
-                  </div>
-                  <div style={{ padding: '1rem' }}>
-                    <h4 style={{ fontSize: '0.975rem', fontWeight: 700, color: 'var(--brand-navy-950)', marginBottom: '0.25rem' }}>
-                      {p.title}
-                    </h4>
-                    <p style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>
-                      {p.description}
-                    </p>
+                      Enlarge
+                    </span>
                   </div>
                 </div>
               );
             })}
           </div>
 
+          {/* Single Clear Next Step Button */}
           <div style={{ textAlign: 'center' }}>
             <Link
               to="/our-work"
-              className="btn btn-secondary btn-lg"
-              style={{ fontWeight: 700, borderColor: 'var(--brand-blue-700)', color: 'var(--brand-blue-700)' }}
+              className="btn btn-secondary btn-md"
+              style={{
+                fontWeight: 700,
+                borderColor: 'var(--brand-blue-700)',
+                color: 'var(--brand-blue-700)',
+              }}
             >
-              <span>Explore All 18 Field Photos in Gallery</span>
-              <ArrowRight size={18} />
+              <span>See Our Work (All 18 Photos)</span>
+              <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 6. Director & Practical Assurance Section */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--brand-navy-950)', color: '#FFFFFF' }}>
+      {/* 4. Compact 1-Row Process & Quick Assistance Strip */}
+      <section style={{ backgroundColor: 'var(--bg-primary)', padding: '2.5rem 0 3rem 0', borderTop: '1px solid var(--border-subtle)' }}>
         <div className="container">
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr',
-              gap: '2.5rem',
-              alignItems: 'center',
+              backgroundColor: 'var(--brand-cyan-50)',
+              borderRadius: 'var(--radius-xl)',
+              padding: '1.5rem 1.75rem',
+              border: '1px solid var(--brand-cyan-100)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.25rem',
             }}
-            className="home-director-grid"
           >
-            <div>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  padding: '0.35rem 0.85rem',
-                  backgroundColor: 'rgba(2, 132, 199, 0.25)',
-                  border: '1px solid rgba(14, 165, 233, 0.4)',
-                  color: 'var(--brand-cyan-300)',
-                  borderRadius: 'var(--radius-full)',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  marginBottom: '1rem',
-                }}
-              >
-                <ShieldCheck size={14} />
-                <span>Genuine Hands-On Leadership</span>
+            {/* Minimal Horizontal Process Row */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                paddingBottom: '1rem',
+                borderBottom: '1px solid rgba(2, 132, 199, 0.15)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: 'var(--brand-blue-700)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 800 }}>1</span>
+                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--brand-navy-950)' }}>Tell us what you need</span>
               </div>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: '#FFFFFF', fontWeight: 800, marginBottom: '1rem', lineHeight: 1.25 }}>
-                Direct Accountability with Director David Nkadayo
-              </h2>
-              <p style={{ color: '#CBD5E1', fontSize: '1.05rem', lineHeight: '1.65', marginBottom: '1.5rem' }}>
-                At {companyData.name}, we do not pass your borehole or water project through layers of third-party agents. Our director and technical personnel personally supervise operations from the first ground survey until clean water flows into your tanks.
-              </p>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem' }}>
-                <Link to="/about" className="btn btn-white btn-md" style={{ fontWeight: 700 }}>
-                  <span>About Our Company</span>
-                  <ArrowRight size={16} />
-                </Link>
-                <button
-                  onClick={() => onRequestService()}
-                  className="btn btn-outline-white btn-md"
-                  style={{ fontWeight: 600 }}
-                >
-                  Request a Service
-                </button>
+              <span style={{ color: 'var(--brand-blue-500)', fontWeight: 700, display: 'none' }} className="process-arrow">→</span>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: 'var(--brand-blue-700)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 800 }}>2</span>
+                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--brand-navy-950)' }}>WhatsApp opens ready</span>
+              </div>
+
+              <span style={{ color: 'var(--brand-blue-500)', fontWeight: 700, display: 'none' }} className="process-arrow">→</span>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: 'var(--brand-blue-700)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', fontWeight: 800 }}>3</span>
+                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--brand-navy-950)' }}>Press Send and talk to our team</span>
               </div>
             </div>
 
-            <div style={{ borderRadius: 'var(--radius-xl)', overflow: 'hidden', border: '2px solid rgba(255, 255, 255, 0.15)' }}>
-              <img
-                src="/assets/images/borehole_drilling_rig_dmeit.jpg"
-                alt="DMEIT heavy drilling rig on site"
-                style={{ width: '100%', height: '320px', objectFit: 'cover' }}
-              />
+            {/* Quick Contextual Action Prompt */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+              }}
+            >
+              <p style={{ fontSize: '0.925rem', color: 'var(--text-body)', margin: 0 }}>
+                Have questions or need advice on your land? <strong>Talk to our team</strong>.
+              </p>
+
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <Link
+                  to="/contact"
+                  className="btn btn-primary btn-sm"
+                  style={{ fontWeight: 700 }}
+                >
+                  <span>Talk to Our Team</span>
+                  <ArrowRight size={15} />
+                </Link>
+                <Link
+                  to="/how-it-works"
+                  className="btn btn-secondary btn-sm"
+                  style={{ fontWeight: 600 }}
+                >
+                  <span>Process & FAQs</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
         <style>{`
-          @media (min-width: 900px) {
-            .home-director-grid {
-              grid-template-columns: 1.2fr 0.8fr !important;
+          @media (min-width: 768px) {
+            .process-arrow {
+              display: inline-block !important;
             }
           }
         `}</style>
-      </section>
-
-      {/* 7. Bottom Front Office Action Strip */}
-      <section style={{ backgroundColor: 'var(--brand-cyan-50)', padding: '3.5rem 0' }}>
-        <div className="container" style={{ textAlign: 'center', maxWidth: '720px' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--brand-navy-950)', marginBottom: '0.75rem' }}>
-            Ready to Start Your Water Project?
-          </h2>
-          <p style={{ fontSize: '1.05rem', color: 'var(--text-body)', lineHeight: '1.6', marginBottom: '1.75rem' }}>
-            Speak directly with Director David Nkadayo and our technical crew. Tell us what you need and we will advise you on the quickest path forward.
-          </p>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', justifyContent: 'center' }}>
-            <button
-              onClick={() => onRequestService()}
-              className="btn btn-primary btn-lg"
-              style={{ fontWeight: 700 }}
-            >
-              Request a Service
-            </button>
-            <button
-              onClick={onScheduleAppointment}
-              className="btn btn-secondary btn-lg"
-              style={{ fontWeight: 600 }}
-            >
-              <Calendar size={18} />
-              Schedule Appointment
-            </button>
-            <a
-              href={companyData.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-whatsapp btn-lg"
-              style={{ fontWeight: 700 }}
-            >
-              <MessageCircle size={19} />
-              Chat on WhatsApp
-            </a>
-          </div>
-        </div>
       </section>
     </div>
   );
