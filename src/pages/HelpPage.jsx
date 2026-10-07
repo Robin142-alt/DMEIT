@@ -606,14 +606,30 @@ export default function HelpPage() {
                         handleFollowUpChoice('Water Livestock', {
                           title: 'Livestock & Cattle Troughs',
                           description:
-                            'We build durable watering troughs connected to reliable borehole supply lines for cattle, sheep, and goats.',
-                          image: '/assets/images/elevated_tank_cattle_trough.jpg',
+                            'We build durable reinforced concrete watering troughs connected to reliable borehole supply lines for cattle, sheep, and goats.',
+                          image: '/assets/images/concrete_cattle_trough_tower.jpg',
                         })
                       }
                       className="btn btn-secondary btn-lg"
                       style={{ justifyContent: 'space-between', padding: '1rem 1.25rem' }}
                     >
                       <span style={{ fontWeight: 700 }}>Water Livestock (Cattle Troughs)</span>
+                      <ArrowRight size={18} />
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        handleFollowUpChoice('Harvest Rainwater & Seasonal Runoff', {
+                          title: 'Water Pans, Dams & Sand Dams',
+                          description:
+                            'We construct water catchment pans, masonry sand dams, and earth dams to harvest seasonal runoff for livestock, irrigation, and community storage.',
+                          image: '/assets/images/sand_dam_water_catchment.jpg',
+                        })
+                      }
+                      className="btn btn-secondary btn-lg"
+                      style={{ justifyContent: 'space-between', padding: '1rem 1.25rem' }}
+                    >
+                      <span style={{ fontWeight: 700 }}>Harvest Rainwater (Water Pans, Dams & Sand Dams)</span>
                       <ArrowRight size={18} />
                     </button>
 

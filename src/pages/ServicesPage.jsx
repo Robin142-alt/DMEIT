@@ -1,8 +1,10 @@
-import React from 'react';
-import { Droplet, ArrowRight, MessageCircle, HelpCircle, Compass } from 'lucide-react';
-import { serviceCategories, customerScenarios, companyData } from '../data/companyData';
+import React, { useState } from 'react';
+import { Droplet, ArrowRight, MessageCircle, HelpCircle, Compass, Eye, Images } from 'lucide-react';
+import { serviceCategories, customerScenarios, companyData, projectGallery } from '../data/companyData';
 
-export default function ServicesPage({ onRequestService }) {
+export default function ServicesPage({ onRequestService, onOpenLightbox }) {
+  const [activePhotoMap, setActivePhotoMap] = useState({});
+
   return (
     <div>
       {/* Page Header Banner */}
@@ -81,52 +83,155 @@ export default function ServicesPage({ onRequestService }) {
                     gap: '1.5rem',
                   }}
                 >
-                  {group.services.map((service) => (
-                    <div
-                      key={service.id}
-                      className="card"
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        height: '100%',
-                        backgroundColor: 'var(--bg-primary)',
-                      }}
-                    >
-                      {/* Photo Preview */}
+                  {group.services.map((service) => {
+                    const servicePhotos = service.images || [service.image];
+                    const activePhotoIdx = activePhotoMap[service.id] || 0;
+                    const currentPhoto = servicePhotos[activePhotoIdx] || service.image;
+
+                    const handlePhotoClick = () => {
+                      if (onOpenLightbox) {
+                        const globalIdx = projectGallery.findIndex((p) => p.image === currentPhoto);
+                        if (globalIdx !== -1) {
+                          onOpenLightbox(globalIdx);
+                        } else {
+                          const fallbackIdx = projectGallery.findIndex((p) => p.image === service.image);
+                          if (fallbackIdx !== -1) onOpenLightbox(fallbackIdx);
+                        }
+                      }
+                    };
+
+                    return (
                       <div
+                        key={service.id}
+                        className="card"
                         style={{
-                          position: 'relative',
-                          height: '190px',
-                          backgroundColor: 'var(--brand-navy-900)',
-                          overflow: 'hidden',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          height: '100%',
+                          backgroundColor: 'var(--bg-primary)',
                         }}
                       >
-                        <img
-                          src={service.image}
-                          alt={service.name}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                          }}
-                          loading="lazy"
-                        />
+                        {/* Photo Preview */}
                         <div
                           style={{
-                            position: 'absolute',
-                            top: '12px',
-                            left: '12px',
-                            backgroundColor: 'rgba(7, 28, 51, 0.85)',
-                            color: '#FFFFFF',
-                            fontSize: '0.725rem',
-                            fontWeight: 700,
-                            padding: '0.25rem 0.65rem',
-                            borderRadius: 'var(--radius-sm)',
+                            position: 'relative',
+                            height: '200px',
+                            backgroundColor: 'var(--brand-navy-900)',
+                            overflow: 'hidden',
+                            cursor: onOpenLightbox ? 'pointer' : 'default',
                           }}
+                          onClick={handlePhotoClick}
+                          role={onOpenLightbox ? 'button' : undefined}
+                          tabIndex={onOpenLightbox ? 0 : undefined}
+                          onKeyDown={(e) => {
+                            if (onOpenLightbox && (e.key === 'Enter' || e.key === ' ')) {
+                              e.preventDefault();
+                              handlePhotoClick();
+                            }
+                          }}
+                          aria-label={`View photo for ${service.name}`}
                         >
-                          {service.badge}
+                          <img
+                            src={currentPhoto}
+                            alt={service.name}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              transition: 'transform 300ms ease',
+                            }}
+                            onMouseEnter={(e) => (e.target.style.transform = 'scale(1.04)')}
+                            onMouseLeave={(e) => (e.target.style.transform = 'scale(1.0)')}
+                            loading="lazy"
+                          />
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '12px',
+                              left: '12px',
+                              backgroundColor: 'rgba(7, 28, 51, 0.85)',
+                              color: '#FFFFFF',
+                              fontSize: '0.725rem',
+                              fontWeight: 700,
+                              padding: '0.25rem 0.65rem',
+                              borderRadius: 'var(--radius-sm)',
+                              zIndex: 1,
+                            }}
+                          >
+                            {service.badge}
+                          </div>
+
+                          {/* Enlarge tag */}
+                          {onOpenLightbox && (
+                            <span
+                              style={{
+                                position: 'absolute',
+                                bottom: '10px',
+                                left: '10px',
+                                backgroundColor: 'rgba(7, 28, 51, 0.8)',
+                                color: '#E2E8F0',
+                                fontSize: '0.7rem',
+                                fontWeight: 600,
+                                padding: '0.2rem 0.55rem',
+                                borderRadius: 'var(--radius-sm)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                zIndex: 1,
+                              }}
+                            >
+                              <Eye size={12} />
+                              Enlarge
+                            </span>
+                          )}
+
+                          {/* Multi-photo switcher pill */}
+                          {servicePhotos.length > 1 && (
+                            <div
+                              style={{
+                                position: 'absolute',
+                                bottom: '10px',
+                                right: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                background: 'rgba(7, 28, 51, 0.88)',
+                                backdropFilter: 'blur(4px)',
+                                padding: '4px 10px',
+                                borderRadius: 'var(--radius-full)',
+                                zIndex: 2,
+                              }}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Images size={12} color="#38BDF8" style={{ marginRight: '2px' }} />
+                              {servicePhotos.map((_, pIdx) => (
+                                <button
+                                  key={pIdx}
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setActivePhotoMap((prev) => ({ ...prev, [service.id]: pIdx }));
+                                  }}
+                                  aria-label={`View photo ${pIdx + 1} of ${servicePhotos.length}`}
+                                  style={{
+                                    width: activePhotoIdx === pIdx ? '16px' : '7px',
+                                    height: '7px',
+                                    borderRadius: 'var(--radius-full)',
+                                    backgroundColor:
+                                      activePhotoIdx === pIdx ? 'var(--brand-cyan-400)' : 'rgba(255, 255, 255, 0.5)',
+                                    border: 'none',
+                                    padding: 0,
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms ease',
+                                  }}
+                                />
+                              ))}
+                              <span style={{ fontSize: '0.7rem', color: '#FFFFFF', fontWeight: 700, marginLeft: '3px' }}>
+                                {activePhotoIdx + 1}/{servicePhotos.length}
+                              </span>
+                            </div>
+                          )}
                         </div>
-                      </div>
 
                       {/* Content */}
                       <div
@@ -185,7 +290,8 @@ export default function ServicesPage({ onRequestService }) {
                         </button>
                       </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ))}

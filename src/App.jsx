@@ -82,7 +82,12 @@ export default function App() {
             />
             <Route
               path="/services"
-              element={<ServicesPage onRequestService={handleOpenRequestModal} />}
+              element={
+                <ServicesPage
+                  onRequestService={handleOpenRequestModal}
+                  onOpenLightbox={handleOpenLightbox}
+                />
+              }
             />
             <Route path="/help" element={<HelpPage />} />
             {/* Safe redirect for any legacy /our-work bookmarks or links */}

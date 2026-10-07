@@ -33,7 +33,7 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
     },
   ];
 
-  // 4 Curated Real Photos with larger visuals and minimal text
+  // 6 Curated Real Photos with larger visuals and minimal text (including cattle troughs and sand dam works)
   const homePhotos = [
     {
       id: 'proj-01',
@@ -52,6 +52,18 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
       title: 'Elevated Storage Tower',
       category: 'Water Storage',
       image: '/assets/images/elevated_steel_tank_tower.jpg',
+    },
+    {
+      id: 'proj-19',
+      title: 'Concrete Cattle Trough',
+      category: 'Livestock Care',
+      image: '/assets/images/concrete_cattle_trough_tower.jpg',
+    },
+    {
+      id: 'proj-21',
+      title: 'Sand Dam & River Weir',
+      category: 'Water Pans & Dams',
+      image: '/assets/images/sand_dam_water_catchment.jpg',
     },
     {
       id: 'proj-08',
@@ -323,6 +335,27 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
                 </div>
               );
             })}
+          </div>
+
+          {/* Browse all photos button */}
+          <div style={{ textAlign: 'center' }}>
+            <button
+              type="button"
+              onClick={() => onOpenLightbox(0)}
+              className="btn btn-secondary btn-md"
+              style={{
+                fontWeight: 700,
+                borderColor: 'var(--brand-blue-700)',
+                color: 'var(--brand-blue-700)',
+                backgroundColor: 'var(--bg-primary)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              <span>Browse All {projectGallery.length} Project Photos</span>
+              <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>

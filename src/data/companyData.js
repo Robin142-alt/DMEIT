@@ -153,19 +153,27 @@ export const serviceCategories = [
         name: 'Livestock & Cattle Troughs',
         shortDesc: 'We build durable watering troughs for cattle, sheep, goats, and farm livestock.',
         fullDesc:
-          'Heavy-duty troughs connected to reliable borehole supply lines, ensuring pastoralists and farmers have clean, constant water for their livestock.',
-        image: '/assets/images/elevated_tank_cattle_trough.jpg',
+          'Heavy-duty reinforced concrete watering troughs and distribution headworks connected to reliable borehole supply lines and elevated towers, ensuring pastoralists and farmers have clean, constant water for their livestock.',
+        image: '/assets/images/concrete_cattle_trough_tower.jpg',
+        images: [
+          '/assets/images/concrete_cattle_trough_tower.jpg',
+          '/assets/images/concrete_cattle_trough_closeup.jpg',
+          '/assets/images/elevated_tank_cattle_trough.jpg',
+        ],
         badge: 'Livestock Care',
         popular: true,
       },
       {
         id: 'water-pans-dams',
-        name: 'Water Pans, Dams & Related Water Works',
-        shortDesc: 'We construct water catchment pans and related infrastructure to harvest rainwater.',
+        name: 'Water Pans, Dams & Sand Dams',
+        shortDesc: 'We construct water catchment pans, sand dams, and earth dams to harvest rainwater.',
         fullDesc:
-          'Excavation and engineering for surface water harvesting, agricultural irrigation reservoirs, and related rural water civil works.',
-        image: '/assets/images/solar_array_landscape.jpg',
-        badge: 'Bulk Storage',
+          'Excavation, masonry river weir sand dams, and civil engineering works for surface water harvesting, seasonal stream catchment, agricultural irrigation reservoirs, and livestock water security.',
+        image: '/assets/images/sand_dam_water_catchment.jpg',
+        images: [
+          '/assets/images/sand_dam_water_catchment.jpg',
+        ],
+        badge: 'Dams & Catchment',
         popular: false,
       },
     ],
@@ -339,6 +347,33 @@ export const projectGallery = [
     orientation: 'portrait',
     featured: false,
   },
+  {
+    id: 'proj-19',
+    title: 'Reinforced Concrete Cattle Trough & Tank Tower',
+    category: 'Community & Farms',
+    image: '/assets/images/concrete_cattle_trough_tower.jpg',
+    description: 'Finished reinforced concrete cattle watering trough connected to elevated steel water storage tower in rural Kenya.',
+    orientation: 'portrait',
+    featured: true,
+  },
+  {
+    id: 'proj-20',
+    title: 'Reinforced Concrete Cattle Trough Headworks',
+    category: 'Community & Farms',
+    image: '/assets/images/concrete_cattle_trough_closeup.jpg',
+    description: 'Direct headworks view of plastered livestock drinking trough with lockable valve inspection chamber and smooth animal access.',
+    orientation: 'portrait',
+    featured: true,
+  },
+  {
+    id: 'proj-21',
+    title: 'Sand Dam & River Weir Water Catchment',
+    category: 'Community & Farms',
+    image: '/assets/images/sand_dam_water_catchment.jpg',
+    description: 'Substantial stone masonry sand dam weir wall impounding seasonal river flow to harvest runoff and replenish shallow underground aquifers.',
+    orientation: 'landscape',
+    featured: true,
+  },
 ];
 
 // 3 Simple steps customer journey
@@ -389,5 +424,12 @@ export const customerScenarios = [
     serviceKey: 'cattle-troughs',
     advice:
       'We build heavy-duty livestock troughs and clean tap points so people and animals have clean water every day.',
+  },
+  {
+    title: 'I want to harvest seasonal runoff or build a dam',
+    solution: 'Water Pans, Dams & Sand Dams',
+    serviceKey: 'water-pans-dams',
+    advice:
+      'We construct stone masonry sand dams across seasonal rivers and excavate earth water pans to capture and store large volumes of rainwater.',
   },
 ];
