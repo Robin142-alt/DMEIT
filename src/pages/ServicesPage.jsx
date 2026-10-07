@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Droplet, ArrowRight, MessageCircle, HelpCircle, Compass, Eye, Images } from 'lucide-react';
+import { Droplet, ArrowRight, MessageCircle, HelpCircle, Compass, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
 import { serviceCategories, customerScenarios, companyData, projectGallery } from '../data/companyData';
 
 export default function ServicesPage({ onRequestService, onOpenLightbox }) {
@@ -185,51 +185,118 @@ export default function ServicesPage({ onRequestService, onOpenLightbox }) {
                             </span>
                           )}
 
-                          {/* Multi-photo switcher pill */}
+                          {/* Translucent visible navigation arrows when service has multiple photos */}
                           {servicePhotos.length > 1 && (
-                            <div
-                              style={{
-                                position: 'absolute',
-                                bottom: '10px',
-                                right: '10px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '6px',
-                                background: 'rgba(7, 28, 51, 0.88)',
-                                backdropFilter: 'blur(4px)',
-                                padding: '4px 10px',
-                                borderRadius: 'var(--radius-full)',
-                                zIndex: 2,
-                              }}
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <Images size={12} color="#38BDF8" style={{ marginRight: '2px' }} />
-                              {servicePhotos.map((_, pIdx) => (
-                                <button
-                                  key={pIdx}
-                                  type="button"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setActivePhotoMap((prev) => ({ ...prev, [service.id]: pIdx }));
-                                  }}
-                                  aria-label={`View photo ${pIdx + 1} of ${servicePhotos.length}`}
-                                  style={{
-                                    width: activePhotoIdx === pIdx ? '16px' : '7px',
-                                    height: '7px',
-                                    borderRadius: 'var(--radius-full)',
-                                    backgroundColor:
-                                      activePhotoIdx === pIdx ? 'var(--brand-cyan-400)' : 'rgba(255, 255, 255, 0.5)',
-                                    border: 'none',
-                                    padding: 0,
-                                    cursor: 'pointer',
-                                    transition: 'all 200ms ease',
-                                  }}
-                                />
-                              ))}
-                              <span style={{ fontSize: '0.7rem', color: '#FFFFFF', fontWeight: 700, marginLeft: '3px' }}>
-                                {activePhotoIdx + 1}/{servicePhotos.length}
+                            <>
+                              {/* Left Arrow */}
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setActivePhotoMap((prev) => ({
+                                    ...prev,
+                                    [service.id]: (activePhotoIdx - 1 + servicePhotos.length) % servicePhotos.length,
+                                  }));
+                                }}
+                                aria-label="Previous photo"
+                                style={{
+                                  position: 'absolute',
+                                  left: '8px',
+                                  top: '50%',
+                                  transform: 'translateY(-50%)',
+                                  width: '32px',
+                                  height: '32px',
+                                  borderRadius: 'var(--radius-full)',
+                                  backgroundColor: 'rgba(7, 28, 51, 0.58)',
+                                  backdropFilter: 'blur(5px)',
+                                  WebkitBackdropFilter: 'blur(5px)',
+                                  border: '1px solid rgba(255, 255, 255, 0.4)',
+                                  color: '#FFFFFF',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  cursor: 'pointer',
+                                  transition: 'all 200ms ease',
+                                  zIndex: 3,
+                                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.35)',
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.backgroundColor = 'rgba(7, 28, 51, 0.88)';
+                                  e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.backgroundColor = 'rgba(7, 28, 51, 0.58)';
+                                  e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                                }}
+                              >
+                                <ChevronLeft size={18} strokeWidth={2.5} />
+                              </button>
+
+                              {/* Right Arrow */}
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setActivePhotoMap((prev) => ({
+                                    ...prev,
+                                    [service.id]: (activePhotoIdx + 1) % servicePhotos.length,
+                                  }));
+                                }}
+                                aria-label="Next photo"
+                                style={{
+                                  position: 'absolute',
+                                  right: '8px',
+                                  top: '50%',
+                                  transform: 'translateY(-50%)',
+                                  width: '32px',
+                                  height: '32px',
+                                  borderRadius: 'var(--radius-full)',
+                                  backgroundColor: 'rgba(7, 28, 51, 0.58)',
+                                  backdropFilter: 'blur(5px)',
+                                  WebkitBackdropFilter: 'blur(5px)',
+                                  border: '1px solid rgba(255, 255, 255, 0.4)',
+                                  color: '#FFFFFF',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  cursor: 'pointer',
+                                  transition: 'all 200ms ease',
+                                  zIndex: 3,
+                                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.35)',
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.backgroundColor = 'rgba(7, 28, 51, 0.88)';
+                                  e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.backgroundColor = 'rgba(7, 28, 51, 0.58)';
+                                  e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                                }}
+                              >
+                                <ChevronRight size={18} strokeWidth={2.5} />
+                              </button>
+
+                              {/* Clean photo count indicator */}
+                              <span
+                                style={{
+                                  position: 'absolute',
+                                  bottom: '10px',
+                                  right: '10px',
+                                  backgroundColor: 'rgba(7, 28, 51, 0.65)',
+                                  backdropFilter: 'blur(4px)',
+                                  WebkitBackdropFilter: 'blur(4px)',
+                                  color: '#FFFFFF',
+                                  fontSize: '0.7rem',
+                                  fontWeight: 700,
+                                  padding: '0.2rem 0.55rem',
+                                  borderRadius: 'var(--radius-full)',
+                                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                                  zIndex: 1,
+                                }}
+                              >
+                                {activePhotoIdx + 1} / {servicePhotos.length}
                               </span>
-                            </div>
+                            </>
                           )}
                         </div>
 
