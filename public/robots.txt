@@ -1,14 +1,8 @@
 # Robots.txt for DMEIT Ventures Ltd
-# Website: https://www.dmeitventuresltd.com
+# https://www.dmeitventuresltd.com
 
 User-agent: *
 Allow: /
-
-# Prevent indexing of query strings, search params or preview URLs
-Disallow: /*?*preview=
-
-# Host declaration
-Host: https://www.dmeitventuresltd.com
 
 # XML Sitemap
 Sitemap: https://www.dmeitventuresltd.com/sitemap.xml
