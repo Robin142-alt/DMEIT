@@ -44,7 +44,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!sitemap\\.xml$|robots\\.txt$|site\\.webmanifest$|assets/|favicon).*)",
+      "source": "/((?!sitemap\\.xml|robots\\.txt|site\\.webmanifest|assets/|favicon).*)",
       "destination": "/index.html"
     }
   ]
