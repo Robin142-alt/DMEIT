@@ -17,9 +17,11 @@ export default function Header({ onRequestService }) {
   }, []);
 
   // Close mobile drawer on route change
-  useEffect(() => {
+  const [prevPath, setPrevPath] = useState(location.pathname);
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname);
     setMobileMenuOpen(false);
-  }, [location.pathname]);
+  }
 
   const navLinks = [
     { label: 'Home', path: '/' },
@@ -65,6 +67,9 @@ export default function Header({ onRequestService }) {
             <img
               src={companyData.logo}
               alt="DMEIT Ventures Ltd Logo"
+              width="180"
+              height="46"
+              decoding="async"
               style={{
                 height: '46px',
                 width: 'auto',

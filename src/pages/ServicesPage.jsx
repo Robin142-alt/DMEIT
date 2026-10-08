@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
-import { Droplet, ArrowRight, MessageCircle, HelpCircle, Compass, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
-import { serviceCategories, customerScenarios, companyData, projectGallery } from '../data/companyData';
+import React, { useState, useMemo } from 'react';
+import { Droplet, ArrowRight, Compass, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
+import { serviceCategories, customerScenarios, projectGallery, allServices } from '../data/companyData';
+import SEO from '../components/SEO';
+import { PAGE_SEO, getBreadcrumbSchema, getServicesSchema } from '../data/seoData';
 
 export default function ServicesPage({ onRequestService, onOpenLightbox }) {
   const [activePhotoMap, setActivePhotoMap] = useState({});
 
+  const servicesSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'Services', url: '/services' },
+      ]),
+      getServicesSchema(allServices),
+    ],
+  }), []);
+
   return (
     <div>
+      <SEO {...PAGE_SEO.services} schema={servicesSchema} />
       {/* Page Header Banner */}
       <section
         style={{
@@ -133,7 +147,7 @@ export default function ServicesPage({ onRequestService, onOpenLightbox }) {
                         >
                           <img
                             src={currentPhoto}
-                            alt={service.name}
+                            alt={`${service.name} — DMEIT Ventures Ltd Kenya Water Contractor`}
                             style={{
                               width: '100%',
                               height: '100%',
@@ -143,6 +157,7 @@ export default function ServicesPage({ onRequestService, onOpenLightbox }) {
                             onMouseEnter={(e) => (e.target.style.transform = 'scale(1.04)')}
                             onMouseLeave={(e) => (e.target.style.transform = 'scale(1.0)')}
                             loading="lazy"
+                            decoding="async"
                           />
                           <div
                             style={{

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   CheckCircle,
   Smartphone,
@@ -6,9 +6,30 @@ import {
   Users,
   ArrowRight,
   HelpCircle,
-  MessageCircle,
+  Calendar,
 } from 'lucide-react';
-import { howItWorksSteps, companyData } from '../data/companyData';
+import { howItWorksSteps } from '../data/companyData';
+import SEO from '../components/SEO';
+import { PAGE_SEO, getBreadcrumbSchema, getHowToSchema, getFaqSchema } from '../data/seoData';
+
+const commonQuestions = [
+  {
+    q: 'Do I really need a hydrogeological ground survey before drilling?',
+    a: 'Yes. A survey helps locate the most promising underground aquifer, estimates the required drilling depth, and is required to obtain regulatory water permits in Kenya.',
+  },
+  {
+    q: 'Can a borehole pump run entirely on solar power without grid electricity?',
+    a: 'Absolutely. We install solar arrays and DC/AC solar pumps that start pumping automatically once the sun is up, saving you from recurring monthly electric or diesel bills.',
+  },
+  {
+    q: 'What if I already have a borehole that was drilled by someone else?',
+    a: 'We can equip it. We test the borehole yield, supply the correct submersible pump, lower riser pipes and cables, install control panels, and pipe water into your storage tanks.',
+  },
+  {
+    q: 'What happens immediately after I press "Continue to WhatsApp"?',
+    a: 'Your project details are cleanly organized into a message. WhatsApp opens with Director David Nkadayo and our team. You simply press Send, and we respond promptly to discuss your site.',
+  },
+];
 
 export default function HowItWorksPage({ onRequestService, onScheduleAppointment }) {
   const stepIcons = [
@@ -17,27 +38,21 @@ export default function HowItWorksPage({ onRequestService, onScheduleAppointment
     <Users key="3" size={32} color="var(--brand-blue-700)" />,
   ];
 
-  const commonQuestions = [
-    {
-      q: 'Do I really need a hydrogeological ground survey before drilling?',
-      a: 'Yes. A survey helps locate the most promising underground aquifer, estimates the required drilling depth, and is required to obtain regulatory water permits in Kenya.',
-    },
-    {
-      q: 'Can a borehole pump run entirely on solar power without grid electricity?',
-      a: 'Absolutely. We install solar arrays and DC/AC solar pumps that start pumping automatically once the sun is up, saving you from recurring monthly electric or diesel bills.',
-    },
-    {
-      q: 'What if I already have a borehole that was drilled by someone else?',
-      a: 'We can equip it. We test the borehole yield, supply the correct submersible pump, lower riser pipes and cables, install control panels, and pipe water into your storage tanks.',
-    },
-    {
-      q: 'What happens immediately after I press "Continue to WhatsApp"?',
-      a: 'Your project details are cleanly organized into a message. WhatsApp opens with Director David Nkadayo and our team. You simply press Send, and we respond promptly to discuss your site.',
-    },
-  ];
+  const pageSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'How It Works', url: '/how-it-works' },
+      ]),
+      getHowToSchema(),
+      getFaqSchema(commonQuestions),
+    ],
+  }), []);
 
   return (
     <div>
+      <SEO {...PAGE_SEO.howItWorks} schema={pageSchema} />
       {/* Page Header */}
       <section
         style={{
@@ -266,7 +281,7 @@ export default function HowItWorksPage({ onRequestService, onScheduleAppointment
             ))}
           </div>
 
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button
               onClick={() => onRequestService()}
               className="btn btn-primary btn-lg"
@@ -275,6 +290,16 @@ export default function HowItWorksPage({ onRequestService, onScheduleAppointment
               <span>Request a Service Now</span>
               <ArrowRight size={18} />
             </button>
+            {onScheduleAppointment && (
+              <button
+                onClick={onScheduleAppointment}
+                className="btn btn-secondary btn-lg"
+                style={{ fontWeight: 700 }}
+              >
+                <Calendar size={18} />
+                <span>Schedule an Appointment</span>
+              </button>
+            )}
           </div>
         </div>
       </section>

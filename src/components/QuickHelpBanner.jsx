@@ -1,8 +1,8 @@
 import React from 'react';
-import { HelpCircle, PhoneCall, ArrowRight, MessageCircle } from 'lucide-react';
+import { HelpCircle, PhoneCall, ArrowRight } from 'lucide-react';
 import { companyData } from '../data/companyData';
 
-export default function QuickHelpBanner({ onNotSureClick, onRequestService }) {
+export default function QuickHelpBanner({ onNotSureClick, _onRequestService }) {
   return (
     <div
       style={{

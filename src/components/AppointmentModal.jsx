@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   X,
   Calendar,
-  Clock,
   Phone,
   Mail,
   Copy,
@@ -14,6 +13,8 @@ import {
 } from 'lucide-react';
 import { companyData } from '../data/companyData';
 import { formatAppointmentMessage, buildWhatsAppLink } from '../utils/whatsapp';
+
+const TODAY_ISO = new Date().toISOString().split('T')[0];
 
 export default function AppointmentModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -30,11 +31,18 @@ export default function AppointmentModal({ isOpen, onClose }) {
   const [isReadyToSend, setIsReadyToSend] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  if (prevIsOpen !== isOpen) {
+    setPrevIsOpen(isOpen);
     if (isOpen) {
       setIsReadyToSend(false);
       setCopied(false);
       setErrors({});
+    }
+  }
+
+  useEffect(() => {
+    if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -239,7 +247,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
                     type="date"
                     className="form-input"
                     value={formData.date}
-                    min={new Date().toISOString().split('T')[0]}
+                    min={TODAY_ISO}
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                   />
                 </div>

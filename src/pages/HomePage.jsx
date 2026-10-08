@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Compass, Wrench, Droplets, ArrowUpRight, MessageSquare, Send } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero';
-import { projectGallery, companyData } from '../data/companyData';
+import SEO from '../components/SEO';
+import { PAGE_SEO } from '../data/seoData';
+import { projectGallery } from '../data/companyData';
 
 export default function HomePage({ onRequestService, onScheduleAppointment, onOpenLightbox }) {
   // 4 Simple Homepage Service Summaries as instructed
@@ -75,6 +77,7 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
 
   return (
     <div className="homepage-rebuild">
+      <SEO {...PAGE_SEO.home} />
       {/* 1. Hero Section (Cinematic photo background + 3 preserved primary actions) */}
       <Hero
         onRequestService={() => onRequestService()}
@@ -277,7 +280,7 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
                 >
                   <img
                     src={item.image}
-                    alt={item.title}
+                    alt={`${item.title} — DMEIT Ventures Ltd Borehole & Water Infrastructure Kenya`}
                     style={{
                       width: '100%',
                       height: '100%',
@@ -288,6 +291,7 @@ export default function HomePage({ onRequestService, onScheduleAppointment, onOp
                     onMouseEnter={(e) => (e.target.style.transform = 'scale(1.04)')}
                     onMouseLeave={(e) => (e.target.style.transform = 'scale(1.0)')}
                     loading="lazy"
+                    decoding="async"
                   />
 
                   {/* Clean Bottom Label */}

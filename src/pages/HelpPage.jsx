@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   HelpCircle,
   Droplets,
@@ -20,6 +20,8 @@ import {
 } from 'lucide-react';
 import { companyData } from '../data/companyData';
 import { formatHelpGuideMessage, buildWhatsAppLink } from '../utils/whatsapp';
+import SEO from '../components/SEO';
+import { PAGE_SEO, getBreadcrumbSchema, SITE_URL } from '../data/seoData';
 
 export default function HelpPage() {
   // Navigation / Wizard State
@@ -187,8 +189,30 @@ export default function HelpPage() {
     setTimeout(() => setCopied(false), 3000);
   };
 
+  const helpSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'Help', url: '/help' },
+      ]),
+      {
+        '@type': 'WebPage',
+        '@id': `${SITE_URL}/help#webpage`,
+        url: `${SITE_URL}/help`,
+        name: 'Water Solutions Help & Problem Solver Wizard',
+        description:
+          'Interactive water problem solver to diagnose borehole requirements, solar pumping, storage towers, or community water needs in Kenya.',
+        isPartOf: {
+          '@id': `${SITE_URL}/#website`,
+        },
+      },
+    ],
+  }), []);
+
   return (
     <div style={{ backgroundColor: 'var(--bg-secondary)', minHeight: '85vh', padding: '2.5rem 0 4.5rem 0' }}>
+      <SEO {...PAGE_SEO.help} schema={helpSchema} />
       <div className="container" style={{ maxWidth: '680px' }}>
         {/* Short Top Header (Always visible, minimal height) */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -794,8 +818,10 @@ export default function HelpPage() {
                 >
                   <img
                     src={recommendedResult.image}
-                    alt={recommendedResult.title}
+                    alt={`${recommendedResult.title} — DMEIT Ventures Ltd Kenya Water Contractor`}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               )}

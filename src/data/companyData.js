@@ -12,6 +12,8 @@ export const companyData = {
   phoneRaw: '+254704200502',
   whatsappNumber: '254704200502',
   whatsappUrl: 'https://wa.me/254704200502',
+  siteUrl: 'https://www.dmeitventuresltd.com',
+  canonicalUrl: 'https://www.dmeitventuresltd.com',
   logo: '/assets/images/dmeit_logo.jpg',
   aboutSummary:
     'DMEIT Ventures Ltd is a hands-on water infrastructure contractor. Led by Director David Nkadayo, we help homeowners, farms, institutions, and communities find, pump, store, and distribute clean groundwater through reliable drilling, solar pumping, and piping systems.',

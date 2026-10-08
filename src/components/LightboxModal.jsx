@@ -160,7 +160,8 @@ export default function LightboxModal({ images, activeIndex, isOpen, onClose, on
           {/* Photograph */}
           <img
             src={currentItem.image}
-            alt={currentItem.title}
+            alt={`${currentItem.title} — DMEIT Ventures Ltd Kenya Water Contractor (${currentItem.category})`}
+            decoding="async"
             style={{
               maxHeight: 'calc(90vh - 140px)',
               maxWidth: '100%',

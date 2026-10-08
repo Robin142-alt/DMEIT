@@ -1,11 +1,34 @@
-import React from 'react';
-import { Phone, MessageCircle, Mail, Calendar, ShieldCheck, MapPin } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Phone } from 'lucide-react';
 import ContactSection from '../components/ContactSection';
-import { companyData } from '../data/companyData';
+import SEO from '../components/SEO';
+import { PAGE_SEO, getBreadcrumbSchema, SITE_URL } from '../data/seoData';
 
 export default function ContactPage({ onScheduleAppointment }) {
+  const contactSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'Contact', url: '/contact' },
+      ]),
+      {
+        '@type': 'ContactPage',
+        '@id': `${SITE_URL}/contact#webpage`,
+        url: `${SITE_URL}/contact`,
+        name: 'Contact DMEIT Ventures Ltd',
+        description:
+          'Get in touch directly with Director David Nkadayo and our engineering team. Call, WhatsApp, email, or send your project details.',
+        mainEntity: {
+          '@id': `${SITE_URL}/#organization`,
+        },
+      },
+    ],
+  }), []);
+
   return (
     <div>
+      <SEO {...PAGE_SEO.contact} schema={contactSchema} />
       {/* Page Header */}
       <section
         style={{

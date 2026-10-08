@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MessageCircle, ArrowUp } from 'lucide-react';
 import { companyData } from '../data/companyData';
 
+const currentYear = new Date().getFullYear();
+
 export default function Footer({ onRequestService, onScheduleAppointment }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -33,7 +35,11 @@ export default function Footer({ onRequestService, onScheduleAppointment }) {
               <Link to="/">
                 <img
                   src={companyData.logo}
-                  alt="DMEIT Ventures Ltd"
+                  alt="DMEIT Ventures Ltd — Reliable Water Solutions Kenya"
+                  width="160"
+                  height="42"
+                  loading="lazy"
+                  decoding="async"
                   style={{
                     height: '42px',
                     width: 'auto',
@@ -191,7 +197,18 @@ export default function Footer({ onRequestService, onScheduleAppointment }) {
             fontSize: '0.825rem',
           }}
         >
-          <p>© {new Date().getFullYear()} {companyData.name}. All rights reserved.</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
+            <p style={{ margin: 0 }}>© {currentYear} {companyData.name}. All rights reserved.</p>
+            <a
+              href="/sitemap.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#94A3B8', textDecoration: 'none', fontSize: '0.8rem' }}
+              title="View XML Sitemap for search engines"
+            >
+              XML Sitemap
+            </a>
+          </div>
 
           <button
             onClick={scrollToTop}

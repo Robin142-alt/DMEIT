@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Wrench, Award, UserCheck, CheckCircle } from 'lucide-react';
+import { UserCheck, CheckCircle } from 'lucide-react';
 import { companyData } from '../data/companyData';
 
 export default function AboutSection({ onRequestService }) {
@@ -98,7 +98,9 @@ export default function AboutSection({ onRequestService }) {
             >
               <img
                 src="/assets/images/solar_pumping_test.jpg"
-                alt="Clean water flowing from newly equipped borehole on site"
+                alt="Clean groundwater flowing from borehole equipped with solar submersible pump — DMEIT Ventures Ltd Kenya"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: '320px',

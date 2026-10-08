@@ -8,7 +8,6 @@ import {
   Check,
   AlertCircle,
   MessageCircle,
-  ExternalLink,
 } from 'lucide-react';
 import { companyData, allServices } from '../data/companyData';
 import { formatServiceRequestMessage, buildWhatsAppLink } from '../utils/whatsapp';
@@ -26,18 +25,26 @@ export default function ServiceRequestModal({ isOpen, onClose, initialService = 
   const [isReadyToSend, setIsReadyToSend] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
+  const [prevInitialService, setPrevInitialService] = useState(initialService);
+  if (prevInitialService !== initialService) {
+    setPrevInitialService(initialService);
     if (initialService) {
       setFormData((prev) => ({ ...prev, service: initialService }));
     }
-  }, [initialService]);
+  }
 
-  useEffect(() => {
-    // Reset state when modal opens
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  if (prevIsOpen !== isOpen) {
+    setPrevIsOpen(isOpen);
     if (isOpen) {
       setIsReadyToSend(false);
       setCopied(false);
       setErrors({});
+    }
+  }
+
+  useEffect(() => {
+    if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';

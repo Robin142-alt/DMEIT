@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.dmeitventuresltd.com/</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/borehole_drilling_rig_dmeit.jpg</image:loc>
+      <image:title>Borehole Drilling Rig DMEIT Ventures Ltd Kenya</image:title>
+      <image:caption>Heavy rotary drilling rig branded DMEIT Ventures Ltd drilling groundwater borehole in Kenya</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/solar_pumping_test.jpg</image:loc>
+      <image:title>Solar Powered Borehole Discharge Test Kenya</image:title>
+      <image:caption>Clean potable water flowing from borehole equipped with solar submersible pump system</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/elevated_steel_tank_tower.jpg</image:loc>
+      <image:title>Elevated Steel Water Storage Tower Kenya</image:title>
+      <image:caption>High elevation structural steel water storage tower with vertical discharge delivery piping</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/concrete_cattle_trough_tower.jpg</image:loc>
+      <image:title>Reinforced Concrete Cattle Watering Trough Kenya</image:title>
+      <image:caption>Heavy-duty livestock drinking trough connected to borehole elevated storage tank in rural Kenya</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/sand_dam_water_catchment.jpg</image:loc>
+      <image:title>Sand Dam &amp; River Weir Water Catchment Kenya</image:title>
+      <image:caption>Stone masonry sand dam weir wall impounding seasonal river flow for groundwater replenishment</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/hdpe_pipeline_laying.jpg</image:loc>
+      <image:title>HDPE Water Pipeline Laying and Trenching Kenya</image:title>
+      <image:caption>DMEIT technical field crew installing high-density polyethylene water supply lines</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Services Page -->
+  <url>
+    <loc>https://www.dmeitventuresltd.com/services</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/submersible_pump_installation.jpg</image:loc>
+      <image:title>Submersible Pump Column Lowering Kenya</image:title>
+      <image:caption>Stainless steel borehole submersible pump and column pipe installation</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/pedrollo_booster_pump.jpg</image:loc>
+      <image:title>Pedrollo Booster and Surface Pump Installation</image:title>
+      <image:caption>High-performance multistage electric water booster pump with pressure controls</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/bridge_pipeline_crossing.jpg</image:loc>
+      <image:title>River Bridge Pipeline Crossing Infrastructure</image:title>
+      <image:caption>Specialized galvanized steel pipe crossing securely mounted along concrete river bridge</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/masonry_storage_tank.jpg</image:loc>
+      <image:title>Ground Masonry Water Storage Reservoir Kenya</image:title>
+      <image:caption>Large circular masonry water tank with durable plastering and galvanized fittings</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/solar_structure_signboard.jpg</image:loc>
+      <image:title>Solar Pumping Structure &amp; Compound Kenya</image:title>
+      <image:caption>Photovoltaic solar array on heavy steel framing with pump control house in fenced compound</image:caption>
+    </image:image>
+  </url>
+
+  <!-- How It Works Page -->
+  <url>
+    <loc>https://www.dmeitventuresltd.com/how-it-works</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/elevated_steel_tank_tower.jpg</image:loc>
+      <image:title>DMEIT Borehole Project Workflow Kenya</image:title>
+      <image:caption>From hydrogeological survey to completed elevated storage tank tower</image:caption>
+    </image:image>
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://www.dmeitventuresltd.com/about</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/borehole_drilling_rig_dmeit.jpg</image:loc>
+      <image:title>DMEIT Ventures Ltd Machinery and Field Team</image:title>
+      <image:caption>Director David Nkadayo and the DMEIT technical field engineering crew</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://www.dmeitventuresltd.com/contact</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/dmeit_logo.jpg</image:loc>
+      <image:title>Contact DMEIT Ventures Ltd Kenya</image:title>
+      <image:caption>Call 0704 200 502 or WhatsApp +254 704 200 502 for borehole and water solutions</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Help Page -->
+  <url>
+    <loc>https://www.dmeitventuresltd.com/help</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.dmeitventuresltd.com/assets/images/solar_array_field.jpg</image:loc>
+      <image:title>Water Problem Solver and Consultation Kenya</image:title>
+      <image:caption>Interactive guidance for finding groundwater, equipping boreholes, solar pumping and storage</image:caption>
+    </image:image>
+  </url>
+</urlset>

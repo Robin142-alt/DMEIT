@@ -1,10 +1,34 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { UserCheck, ShieldCheck, Wrench, CheckCircle, ArrowRight } from 'lucide-react';
 import { companyData } from '../data/companyData';
+import SEO from '../components/SEO';
+import { PAGE_SEO, getBreadcrumbSchema, SITE_URL } from '../data/seoData';
 
 export default function AboutPage({ onRequestService }) {
+  const aboutSchema = useMemo(() => ({
+    '@context': 'https://schema.org',
+    '@graph': [
+      getBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'About', url: '/about' },
+      ]),
+      {
+        '@type': 'AboutPage',
+        '@id': `${SITE_URL}/about#webpage`,
+        url: `${SITE_URL}/about`,
+        name: 'About DMEIT Ventures Ltd',
+        description:
+          'Practical Kenyan water contractors built on heavy machinery, skilled field technicians, and direct communication.',
+        mainEntity: {
+          '@id': `${SITE_URL}/#organization`,
+        },
+      },
+    ],
+  }), []);
+
   return (
     <div>
+      <SEO {...PAGE_SEO.about} schema={aboutSchema} />
       {/* Page Header */}
       <section
         style={{
@@ -114,8 +138,10 @@ export default function AboutPage({ onRequestService }) {
             <div style={{ borderRadius: 'var(--radius-xl)', overflow: 'hidden', border: '2px solid var(--border-subtle)', boxShadow: 'var(--shadow-lg)' }}>
               <img
                 src="/assets/images/borehole_drilling_rig_dmeit.jpg"
-                alt="DMEIT heavy drilling rig operating in field"
+                alt="DMEIT Ventures Ltd heavy borehole drilling rig operating in Kenya under Director David Nkadayo"
                 style={{ width: '100%', height: '380px', objectFit: 'cover' }}
+                loading="lazy"
+                decoding="async"
               />
               <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-primary)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>

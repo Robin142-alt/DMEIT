@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Droplet, Sparkles, Check } from 'lucide-react';
+import { ArrowRight, Droplet, Sparkles } from 'lucide-react';
 import { serviceCategories } from '../data/companyData';
 
 export default function ServicesSection({ onSelectService }) {
@@ -75,7 +75,7 @@ export default function ServicesSection({ onSelectService }) {
                     >
                       <img
                         src={service.image}
-                        alt={service.name}
+                        alt={`${service.name} — DMEIT Ventures Ltd Borehole & Water Infrastructure Kenya`}
                         style={{
                           width: '100%',
                           height: '100%',
@@ -85,6 +85,7 @@ export default function ServicesSection({ onSelectService }) {
                         onMouseEnter={(e) => (e.target.style.transform = 'scale(1.05)')}
                         onMouseLeave={(e) => (e.target.style.transform = 'scale(1.0)')}
                         loading="lazy"
+                        decoding="async"
                       />
 
                       {/* Service Badge Tag */}

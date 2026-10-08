@@ -5,8 +5,6 @@ import {
   Mail,
   Send,
   Calendar,
-  Clock,
-  CheckCircle2,
   AlertCircle,
   Copy,
   Check,

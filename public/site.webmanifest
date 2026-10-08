@@ -1,0 +1,17 @@
+{
+  "name": "DMEIT Ventures Ltd",
+  "short_name": "DMEIT",
+  "description": "Reliable Water Solutions & Borehole Drilling Kenya",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071C33",
+  "theme_color": "#071C33",
+  "icons": [
+    {
+      "src": "/assets/images/dmeit_logo.jpg",
+      "sizes": "192x192 512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
